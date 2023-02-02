@@ -1,9 +1,12 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 export default function Game({ name, id, onDelete }) {
   return (
     <StyledGameContainer>
-      <StyledGame>{name}</StyledGame>
+      <Link href={`/${id}`}>
+        <StyledGame>{name}</StyledGame>
+      </Link>
       <StyledButton onClick={() => onDelete(id)}>Delete</StyledButton>
     </StyledGameContainer>
   );

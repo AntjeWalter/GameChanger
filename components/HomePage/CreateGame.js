@@ -8,6 +8,7 @@ export default function CreateGame({ onCreateGame }) {
     const newGame = {
       id: nanoid(),
       name: gameName,
+      players: [],
     };
     onCreateGame(newGame);
     event.target.reset();
