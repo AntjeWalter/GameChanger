@@ -1,9 +1,10 @@
 import { Fragment, useState } from "react";
 import CreateGame from "../components/CreateGame";
 import Game from "../components/Game";
+import { useLocalStorage } from "../helpers/hooks";
 
 export default function Home() {
-  const [games, setGames] = useState([]);
+  const [games, setGames] = useLocalStorage("games", []);
 
   function handleCreateGame(newGame) {
     setGames([...games, newGame]);
