@@ -1,4 +1,5 @@
 import { nanoid } from "nanoid";
+import styled from "styled-components";
 
 export default function PlayerForm({ onAddNewPlayer, gameId }) {
   function handlePlayerSubmit(event) {
@@ -6,16 +7,23 @@ export default function PlayerForm({ onAddNewPlayer, gameId }) {
     const player = event.target.player.value;
     const newPlayer = {
       name: player,
+      points: 0,
       id: nanoid(),
     };
     onAddNewPlayer(newPlayer, gameId);
+    event.target.reset();
   }
 
   return (
-    <form onSubmit={handlePlayerSubmit}>
+    <StyledForm onSubmit={handlePlayerSubmit}>
       <label>Add players:</label>
       <input placeholder="Player Name" name="player"></input>
       <button type="submit">+</button>
-    </form>
+    </StyledForm>
   );
 }
+
+const StyledForm = styled.form`
+  display: flex;
+  justify-content: space-between;
+`;
