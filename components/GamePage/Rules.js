@@ -11,17 +11,23 @@ export default function Rules({ onAddRules, rules }) {
   return (
     <>
       <h3>Rules:</h3>
-      <p>{rules}</p>
+      <StyledRules>{rules}</StyledRules>
       <StyledForm onSubmit={handleSubmit}>
         <StyledTextarea
           placeholder="Rules for the game"
           name="rules"
+          wrap="hard"
+          cols="20"
         ></StyledTextarea>
         <StyledButton type="submit">Add notes</StyledButton>
       </StyledForm>
     </>
   );
 }
+
+const StyledRules = styled.p`
+  white-space: pre-line;
+`;
 
 const StyledForm = styled.form`
   display: flex;
