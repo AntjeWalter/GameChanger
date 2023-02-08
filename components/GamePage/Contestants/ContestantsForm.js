@@ -17,7 +17,10 @@ export default function ContestantsForm({ onAddNewContestant, gameId }) {
     <>
       <StyledForm onSubmit={handleContestantSubmit}>
         <label>Add contestant:</label>
-        <input placeholder="Contestant Name" name="contestant"></input>
+        <StyledInput
+          placeholder="Contestant Name"
+          name="contestant"
+        ></StyledInput>
         <button type="submit">+</button>
       </StyledForm>
       <hr />
@@ -29,4 +32,8 @@ const StyledForm = styled.form`
   display: flex;
   justify-content: space-between;
   margin: 20px 0px;
+`;
+
+const StyledInput = styled.input`
+  font-family: inherit;
 `;

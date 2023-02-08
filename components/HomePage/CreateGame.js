@@ -48,7 +48,7 @@ const StyledInput = styled.input`
 `;
 
 const StyledButton = styled.button`
-  background-color: green;
+  background-color: #990d35;
   border-radius: 5px;
   padding: 4px;
   margin-top: 10px;

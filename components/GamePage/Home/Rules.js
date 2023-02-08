@@ -10,7 +10,7 @@ export default function Rules({ onAddRules, rules }) {
 
   return (
     <>
-      <h3>Rules:</h3>
+      <h4>Rules:</h4>
       <StyledRules>{rules}</StyledRules>
       <StyledForm onSubmit={handleSubmit}>
         <StyledTextarea
@@ -36,8 +36,13 @@ const StyledForm = styled.form`
 
 const StyledTextarea = styled.textarea`
   width: 70%;
+  font-family: inherit;
 `;
 
 const StyledButton = styled.button`
   width: 25%;
+  font-family: inherit;
+  border: none;
+  border-radius: 5px;
+  background-color: #0d9971;
 `;

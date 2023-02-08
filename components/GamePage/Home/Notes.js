@@ -10,7 +10,7 @@ export default function Notes({ onAddNotes, notes }) {
 
   return (
     <>
-      <h3>Notes:</h3>
+      <h4>Notes:</h4>
       <p>{notes}</p>
       <StyledForm onSubmit={handleSubmit}>
         <StyledTextarea
@@ -30,8 +30,13 @@ const StyledForm = styled.form`
 
 const StyledTextarea = styled.textarea`
   width: 70%;
+  font-family: inherit;
 `;
 
 const StyledButton = styled.button`
   width: 25%;
+  font-family: inherit;
+  border: none;
+  border-radius: 5px;
+  background-color: #0d9971;
 `;

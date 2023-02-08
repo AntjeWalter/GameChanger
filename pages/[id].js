@@ -205,7 +205,7 @@ export default function GamePage({ onAddNewPlayer, onAddNewContestant }) {
         </>
       ) : null}
 
-      <StyledBackButton onClick={() => router.back()}>back</StyledBackButton>
+      <StyledBackButton onClick={() => router.back()}>🔙</StyledBackButton>
     </>
   );
 }
@@ -217,10 +217,16 @@ const StyledNavigation = styled.section`
 
 const StyledButton = styled.button`
   padding: 3px 10px;
+  border: none;
+  border-bottom: 3px solid #990d35;
+  background-color: transparent;
 `;
 
 const StyledBackButton = styled.button`
   position: fixed;
   bottom: 10px;
   left: 20px;
+  background-color: transparent;
+  border-radius: 5px;
+  font-size: 1.2rem;
 `;
