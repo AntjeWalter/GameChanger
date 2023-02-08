@@ -9,6 +9,7 @@ export default function CreateGame({ onCreateGame }) {
       id: nanoid(),
       name: gameName,
       players: [],
+      contestants: [],
       notes: "",
       rules: "",
     };

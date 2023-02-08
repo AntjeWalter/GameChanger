@@ -5,7 +5,6 @@ export default function PlayersAndPoints({
   playersArray,
   onAddPoints,
   onRemovePoints,
-  games,
 }) {
   return playersArray.map((player) => {
     return (

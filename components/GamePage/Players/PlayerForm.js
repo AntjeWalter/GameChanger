@@ -15,15 +15,19 @@ export default function PlayerForm({ onAddNewPlayer, gameId }) {
   }
 
   return (
-    <StyledForm onSubmit={handlePlayerSubmit}>
-      <label>Add players:</label>
-      <input placeholder="Player Name" name="player"></input>
-      <button type="submit">+</button>
-    </StyledForm>
+    <>
+      <StyledForm onSubmit={handlePlayerSubmit}>
+        <label>Add players:</label>
+        <input placeholder="Player Name" name="player"></input>
+        <button type="submit">+</button>
+      </StyledForm>
+      <hr />
+    </>
   );
 }
 
 const StyledForm = styled.form`
   display: flex;
   justify-content: space-between;
+  margin: 20px 0px;
 `;
