@@ -33,7 +33,8 @@ const StyledGame = styled.h2`
 `;
 
 const StyledButton = styled.button`
-  background-color: #d52941;
+  background-color: #990d35;
+  border: none;
   border-radius: 5px;
   color: white;
 `;

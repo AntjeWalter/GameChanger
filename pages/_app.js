@@ -1,5 +1,6 @@
 import GlobalStyles from "../components/GlobalStyles";
 import { useLocalStorage } from "../helpers/hooks";
+import { useEffect } from "react";
 
 function MyApp({ Component, pageProps }) {
   const [games, setGames] = useLocalStorage("games", []);

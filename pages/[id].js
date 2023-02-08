@@ -7,6 +7,7 @@ import PlayersAndPoints from "../components/GamePage/Players/PlayersAndPoints";
 import NotesAndRules from "../components/GamePage/Home/NotesAndRules";
 import ContestantsForm from "../components/GamePage/Contestants/ContestantsForm";
 import ContestantsAndPoints from "../components/GamePage/Contestants/ContestantsAndPoints";
+import { useEffect } from "react";
 
 export default function GamePage({ onAddNewPlayer, onAddNewContestant }) {
   const router = useRouter();

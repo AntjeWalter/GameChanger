@@ -48,7 +48,8 @@ const StyledInput = styled.input`
 `;
 
 const StyledButton = styled.button`
-  background-color: #990d35;
+  background-color: #0d9971;
+  border: none;
   border-radius: 5px;
   padding: 4px;
   margin-top: 10px;
