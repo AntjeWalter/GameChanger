@@ -5,11 +5,17 @@ const GlobalStyles = createGlobalStyle`
     body {
         padding: 0;
         margin: 10px;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    }
+        font-family: Quicksand;
+        background-color: #f6f8ff;
+    }   
 
     * {
         box-sizing: border-box;
+    }
+
+    @font-face {
+        font-family: Quicksand;
+        src: url("/fonts/Quicksand/static/Quicksand-Regular.ttf") format("truetype");
     }
 `;
 

@@ -1,5 +1,6 @@
 import GlobalStyles from "../components/GlobalStyles";
 import { useLocalStorage } from "../helpers/hooks";
+import { useEffect } from "react";
 
 function MyApp({ Component, pageProps }) {
   const [games, setGames] = useLocalStorage("games", []);
@@ -25,6 +26,16 @@ function MyApp({ Component, pageProps }) {
     );
   }
 
+  function handleAddNewContestant(newContestant, gameId) {
+    setGames(
+      games.map((game) =>
+        game.id === gameId
+          ? { ...game, contestants: [...game.contestants, newContestant] }
+          : game
+      )
+    );
+  }
+
   return (
     <>
       <GlobalStyles />
@@ -33,6 +44,7 @@ function MyApp({ Component, pageProps }) {
         onCreateGame={handleCreateGame}
         onDelete={handleDeleteGame}
         onAddNewPlayer={handleAddNewPlayer}
+        onAddNewContestant={handleAddNewContestant}
         games={games}
       />
     </>

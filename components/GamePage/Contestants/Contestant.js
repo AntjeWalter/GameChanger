@@ -1,40 +1,40 @@
 import styled from "styled-components";
 
-export default function Player({
-  playerId,
+export default function Contestant({
+  contestantId,
   name,
   points,
-  onAddPoints,
-  onRemovePoints,
+  onAddContestantPoints,
+  onRemoveContestantPoints,
 }) {
   return (
-    <StyledPlayer>
+    <StyledContestant>
       <StyledName>{name}</StyledName>
       <StyledPoints>
         {points === 1 ? `${points} Punkt` : `${points} Punkte`}{" "}
       </StyledPoints>
       <StyledButtons>
-        <button
+        <StyledRemoveButton
           aria-label="Remove one point"
-          onClick={() => onRemovePoints(playerId)}
+          onClick={() => onRemoveContestantPoints(contestantId)}
         >
           -
-        </button>
+        </StyledRemoveButton>
         <StyledAddButton
           aria-label="Add one point"
-          onClick={() => onAddPoints(playerId)}
+          onClick={() => onAddContestantPoints(contestantId)}
         >
           +
         </StyledAddButton>
       </StyledButtons>
-    </StyledPlayer>
+    </StyledContestant>
   );
 }
 
-const StyledPlayer = styled.section`
+const StyledContestant = styled.section`
   display: grid;
   grid-template-areas: "name name points buttons";
-  grid-template-columns: 3fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr;
   margin: 10px 0;
 `;
 
@@ -51,8 +51,17 @@ const StyledButtons = styled.div`
   justify-self: right;
 `;
 
+const StyledRemoveButton = styled.button`
+  border: none;
+  border-radius: 2px;
+  background-color: #990d35;
+  color: white;
+`;
+
 const StyledAddButton = styled.button`
-  background-color: green;
+  background-color: #0d9971;
+  border: none;
+  border-radius: 2px;
   color: white;
   margin-left: 2px;
 `;

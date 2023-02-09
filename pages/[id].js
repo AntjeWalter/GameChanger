@@ -1,16 +1,22 @@
 import { useRouter } from "next/router";
-import styled from "styled-components";
-import PlayerForm from "../components/GamePage/PlayerForm";
-import PlayersAndPoints from "../components/GamePage/PlayersAndPoints";
-import Notes from "../components/GamePage/Notes";
-import Rules from "../components/GamePage/Rules";
 import { useLocalStorage } from "../helpers/hooks";
+import { useState } from "react";
+import styled from "styled-components";
+import PlayerForm from "../components/GamePage/Players/PlayerForm";
+import PlayersAndPoints from "../components/GamePage/Players/PlayersAndPoints";
+import NotesAndRules from "../components/GamePage/Home/NotesAndRules";
+import ContestantsForm from "../components/GamePage/Contestants/ContestantsForm";
+import ContestantsAndPoints from "../components/GamePage/Contestants/ContestantsAndPoints";
+import { useEffect } from "react";
 
-export default function GamePage({ onAddNewPlayer }) {
+export default function GamePage({ onAddNewPlayer, onAddNewContestant }) {
   const router = useRouter();
   const { id } = router.query;
 
   const [games, setGames] = useLocalStorage("games");
+  const [home, setHome] = useState(true);
+  const [players, setPlayers] = useState(false);
+  const [contestants, setContestants] = useState(false);
 
   if (!games) {
     return null;
@@ -66,7 +72,53 @@ export default function GamePage({ onAddNewPlayer }) {
     );
   }
 
-  const playersArray = currentGame.players;
+  function handleAddContestantPoints(contestantId) {
+    const currentContestant = currentGame.contestants.find(
+      (contestant) => contestant.id === contestantId
+    );
+
+    const newPoints = currentContestant.points + 1;
+    const contestantNewPoints = currentGame.contestants.map((contestant) =>
+      contestant.id === contestantId
+        ? { ...contestant, points: newPoints }
+        : contestant
+    );
+
+    setGames(
+      games.map((game) =>
+        game.id === id
+          ? {
+              ...game,
+              contestants: contestantNewPoints,
+            }
+          : game
+      )
+    );
+  }
+
+  function handleRemoveContestantPoints(contestantId) {
+    const currentContestant = currentGame.contestants.find(
+      (contestant) => contestant.id === contestantId
+    );
+
+    const newPoints = currentContestant.points - 1;
+    const contestantNewPoints = currentGame.contestants.map((contestant) =>
+      contestant.id === contestantId
+        ? { ...contestant, points: newPoints }
+        : contestant
+    );
+
+    setGames(
+      games.map((game) =>
+        game.id === id
+          ? {
+              ...game,
+              contestants: contestantNewPoints,
+            }
+          : game
+      )
+    );
+  }
 
   function handleAddNotes(gameNotes) {
     setGames(
@@ -84,31 +136,99 @@ export default function GamePage({ onAddNewPlayer }) {
     );
   }
 
+  const playersArray = currentGame.players;
+  const contestantsArray = currentGame.contestants;
+
+  function handleClickHome() {
+    setHome(true);
+    setPlayers(false);
+    setContestants(false);
+  }
+
+  function handleClickPlayers() {
+    setHome(false);
+    setPlayers(true);
+    setContestants(false);
+  }
+
+  function handleClickContestants() {
+    setHome(false);
+    setPlayers(false);
+    setContestants(true);
+  }
+
   return (
     <>
       <h2>{currentGame.name}</h2>
-      <PlayerForm onAddNewPlayer={onAddNewPlayer} gameId={currentGame.id} />
-      <PlayersAndPoints
-        gameId={currentGame.id}
-        playersArray={playersArray}
-        onAddPoints={handleAddPoints}
-        onRemovePoints={handleRemovePoints}
-      />
-      <hr />
-      <Notes
-        gameId={currentGame.id}
-        onAddNotes={handleAddNotes}
-        notes={currentGame.notes}
-      />
-      <hr />
-      <Rules onAddRules={handleAddRules} rules={currentGame.rules} />
-      <StyledBackButton onClick={() => router.back()}>back</StyledBackButton>
+      <StyledNavigation>
+        <StyledButton onClick={handleClickHome}>Home</StyledButton>
+        <StyledButton onClick={handleClickPlayers}>Players</StyledButton>
+        <StyledButton onClick={handleClickContestants}>
+          Contestants
+        </StyledButton>
+      </StyledNavigation>
+
+      {home ? (
+        <>
+          <h3>Home</h3>
+          <NotesAndRules
+            gameId={currentGame.id}
+            onAddNotes={handleAddNotes}
+            notes={currentGame.notes}
+            onAddRules={handleAddRules}
+            rules={currentGame.rules}
+          />
+        </>
+      ) : players ? (
+        <>
+          <h3>Players</h3>
+          <PlayerForm onAddNewPlayer={onAddNewPlayer} gameId={currentGame.id} />
+          <PlayersAndPoints
+            gameId={currentGame.id}
+            playersArray={playersArray}
+            onAddPoints={handleAddPoints}
+            onRemovePoints={handleRemovePoints}
+          />
+        </>
+      ) : contestants ? (
+        <>
+          <h3>Contestants</h3>
+          <ContestantsForm
+            onAddNewContestant={onAddNewContestant}
+            gameId={currentGame.id}
+          />
+          <ContestantsAndPoints
+            gameId={currentGame.id}
+            contestantsArray={contestantsArray}
+            onAddContestantPoints={handleAddContestantPoints}
+            onRemoveContestantPoints={handleRemoveContestantPoints}
+          />
+        </>
+      ) : null}
+
+      <StyledBackButton onClick={() => router.back()}>🔙</StyledBackButton>
     </>
   );
 }
+
+const StyledNavigation = styled.section`
+  display: flex;
+  justify-content: space-around;
+`;
+
+const StyledButton = styled.button`
+  padding: 3px 10px;
+  border: none;
+  border-bottom: 3px solid #990d35;
+  background-color: transparent;
+  font-size: 0.9rem;
+`;
 
 const StyledBackButton = styled.button`
   position: fixed;
   bottom: 10px;
   left: 20px;
+  background-color: transparent;
+  border-radius: 5px;
+  font-size: 1.2rem;
 `;

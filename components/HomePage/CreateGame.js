@@ -9,6 +9,7 @@ export default function CreateGame({ onCreateGame }) {
       id: nanoid(),
       name: gameName,
       players: [],
+      contestants: [],
       notes: "",
       rules: "",
     };
@@ -47,7 +48,8 @@ const StyledInput = styled.input`
 `;
 
 const StyledButton = styled.button`
-  background-color: green;
+  background-color: #0d9971;
+  border: none;
   border-radius: 5px;
   padding: 4px;
   margin-top: 10px;
