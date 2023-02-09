@@ -56,6 +56,7 @@ const StyledRemoveButton = styled.button`
   border-radius: 2px;
   background-color: #990d35;
   color: white;
+  font-family: inherit;
 `;
 
 const StyledAddButton = styled.button`
@@ -64,4 +65,5 @@ const StyledAddButton = styled.button`
   border-radius: 2px;
   color: white;
   margin-left: 2px;
+  font-family: inherit;
 `;

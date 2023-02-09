@@ -19,7 +19,7 @@ export default function PlayerForm({ onAddNewPlayer, gameId }) {
       <StyledForm onSubmit={handlePlayerSubmit}>
         <label>Add players:</label>
         <StyledInput placeholder="Player Name" name="player"></StyledInput>
-        <button type="submit">+</button>
+        <StyledButton type="submit">+</StyledButton>
       </StyledForm>
       <hr />
     </>
@@ -33,5 +33,9 @@ const StyledForm = styled.form`
 `;
 
 const StyledInput = styled.input`
+  font-family: inherit;
+`;
+
+const StyledButton = styled.button`
   font-family: inherit;
 `;

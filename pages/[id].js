@@ -221,6 +221,7 @@ const StyledButton = styled.button`
   border: none;
   border-bottom: 3px solid #990d35;
   background-color: transparent;
+  font-size: 0.9rem;
 `;
 
 const StyledBackButton = styled.button`
