@@ -36,6 +36,34 @@ function MyApp({ Component, pageProps }) {
     );
   }
 
+  function handleAddChosenContestants(chosenName, playerId, gameId) {
+    const currentGame = games.find((game) => game.id === gameId);
+
+    const currentPlayer = currentGame.players.find(
+      (player) => player.id === playerId
+    );
+
+    const playerWithChosenContestant = currentGame.players.map((player) =>
+      player.id === playerId
+        ? {
+            ...player,
+            chosenContestants: [...player.chosenContestants, chosenName],
+          }
+        : player
+    );
+
+    setGames(
+      games.map((game) =>
+        game.id === gameId
+          ? {
+              ...game,
+              players: playerWithChosenContestant,
+            }
+          : game
+      )
+    );
+  }
+
   return (
     <>
       <GlobalStyles />
@@ -46,6 +74,7 @@ function MyApp({ Component, pageProps }) {
         onAddNewPlayer={handleAddNewPlayer}
         onAddNewContestant={handleAddNewContestant}
         games={games}
+        onAddChosenContestants={handleAddChosenContestants}
       />
     </>
   );

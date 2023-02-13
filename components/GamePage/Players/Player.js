@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 export default function Player({
   playerId,
@@ -6,10 +7,14 @@ export default function Player({
   points,
   onAddPoints,
   onRemovePoints,
+  gameId,
+  onAddChosenContestants,
 }) {
   return (
     <StyledPlayer>
-      <StyledName>{name}</StyledName>
+      <StyledLink href={`/game/${gameId}/player/${playerId}`}>
+        {name}
+      </StyledLink>
       <StyledPoints>
         {points === 1 ? `${points} Punkt` : `${points} Punkte`}{" "}
       </StyledPoints>
@@ -38,7 +43,7 @@ const StyledPlayer = styled.section`
   margin: 10px 0;
 `;
 
-const StyledName = styled.div`
+const StyledLink = styled(Link)`
   grid-area: "name";
 `;
 

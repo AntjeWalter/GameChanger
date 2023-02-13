@@ -9,6 +9,7 @@ export default function PlayerForm({ onAddNewPlayer, gameId }) {
       name: player,
       points: 0,
       id: nanoid(),
+      chosenContestants: [],
     };
     onAddNewPlayer(newPlayer, gameId);
     event.target.reset();

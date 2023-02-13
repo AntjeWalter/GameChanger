@@ -1,15 +1,18 @@
 import { useRouter } from "next/router";
-import { useLocalStorage } from "../helpers/hooks";
+import { useLocalStorage } from "../../../helpers/hooks";
 import { useState } from "react";
 import styled from "styled-components";
-import PlayerForm from "../components/GamePage/Players/PlayerForm";
-import PlayersAndPoints from "../components/GamePage/Players/PlayersAndPoints";
-import NotesAndRules from "../components/GamePage/Home/NotesAndRules";
-import ContestantsForm from "../components/GamePage/Contestants/ContestantsForm";
-import ContestantsAndPoints from "../components/GamePage/Contestants/ContestantsAndPoints";
-import { useEffect } from "react";
+import PlayerForm from "../../../components/GamePage/Players/PlayerForm";
+import PlayersAndPoints from "../../../components/GamePage/Players/PlayersAndPoints";
+import NotesAndRules from "../../../components/GamePage/Home/NotesAndRules";
+import ContestantsForm from "../../../components/GamePage/Contestants/ContestantsForm";
+import ContestantsAndPoints from "../../../components/GamePage/Contestants/ContestantsAndPoints";
 
-export default function GamePage({ onAddNewPlayer, onAddNewContestant }) {
+export default function GamePage({
+  onAddNewPlayer,
+  onAddNewContestant,
+  onAddChosenContestants,
+}) {
   const router = useRouter();
   const { id } = router.query;
 
@@ -188,6 +191,9 @@ export default function GamePage({ onAddNewPlayer, onAddNewContestant }) {
             playersArray={playersArray}
             onAddPoints={handleAddPoints}
             onRemovePoints={handleRemovePoints}
+            currentGame={currentGame}
+            games={games}
+            onAddChosenContestants={onAddChosenContestants}
           />
         </>
       ) : contestants ? (

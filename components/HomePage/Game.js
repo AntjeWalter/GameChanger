@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Game({ name, id, onDelete }) {
   return (
     <StyledGameContainer>
-      <StyledLink href={`/${id}`}>
+      <StyledLink href={`/game/${id}`}>
         <StyledGame>🎲 {name}</StyledGame>
       </StyledLink>
       <StyledButton onClick={() => onDelete(id)}>Delete Game</StyledButton>
