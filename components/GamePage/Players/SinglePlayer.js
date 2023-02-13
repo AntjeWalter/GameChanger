@@ -34,7 +34,11 @@ export default function SinglePlayer({
           <option key={contestant.id}>{contestant.name}</option>
         ))}
       </select>
-      <p>{currentPlayersContestants}</p>
+      <ul>
+        {currentPlayersContestants.map((contestant) => (
+          <li>{contestant}</li>
+        ))}
+      </ul>
     </>
   );
 }
