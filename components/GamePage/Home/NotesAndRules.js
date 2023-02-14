@@ -10,7 +10,7 @@ export default function NotesAndRules({
 }) {
   return (
     <>
-      <Rules onAddRules={onAddRules} rules={rules} />
+      <Rules onAddRules={onAddRules} rules={rules} gameId={gameId} />
       <hr />
       <Notes gameId={gameId} onAddNotes={onAddNotes} notes={notes} />
     </>

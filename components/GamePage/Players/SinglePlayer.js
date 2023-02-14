@@ -1,25 +1,24 @@
+import { Fragment } from "react";
 import { useLocalStorage } from "../../../helpers/hooks";
+import ChosenContestant from "./ChosenContestants";
 
 export default function SinglePlayer({
   playerId,
   currentGame,
   currentPlayer,
   onAddChosenContestants,
+  onDeleteChosenContestant,
 }) {
-  const [games, setGames] = useLocalStorage("games");
-
   const currentName = currentPlayer.name;
   const currentPoints = currentPlayer.points;
   const contestants = currentGame.contestants;
   const gameId = currentGame.id;
   const currentPlayersContestants = currentPlayer.chosenContestants;
 
-  console.log("currentPlayersContestants", currentPlayersContestants);
-
   function handleChange(event) {
     event.preventDefault();
     const chosenName = event.target.value;
-    onAddChosenContestants(chosenName, playerId, gameId);
+    onAddChosenContestants(chosenName, playerId, gameId, contestants);
   }
 
   return (
@@ -36,7 +35,16 @@ export default function SinglePlayer({
       </select>
       <ul>
         {currentPlayersContestants.map((contestant) => (
-          <li>{contestant}</li>
+          <Fragment key={contestant.id}>
+            <ChosenContestant
+              contestantId={contestant.id}
+              contestantName={contestant.name}
+              contestantPoints={contestant.points}
+              onDeleteChosenContestant={onDeleteChosenContestant}
+              gameId={currentGame.id}
+              currentPlayerId={currentPlayer.id}
+            />
+          </Fragment>
         ))}
       </ul>
     </>

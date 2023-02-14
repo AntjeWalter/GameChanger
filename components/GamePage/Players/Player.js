@@ -8,7 +8,7 @@ export default function Player({
   onAddPoints,
   onRemovePoints,
   gameId,
-  onAddChosenContestants,
+  currentGame,
 }) {
   return (
     <StyledPlayer>
@@ -21,13 +21,13 @@ export default function Player({
       <StyledButtons>
         <StyledRemoveButton
           aria-label="Remove one point"
-          onClick={() => onRemovePoints(playerId)}
+          onClick={() => onRemovePoints(playerId, currentGame, gameId)}
         >
           -
         </StyledRemoveButton>
         <StyledAddButton
           aria-label="Add one point"
-          onClick={() => onAddPoints(playerId)}
+          onClick={() => onAddPoints(playerId, currentGame, gameId)}
         >
           +
         </StyledAddButton>

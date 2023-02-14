@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export default function Rules({ onAddRules, rules }) {
+export default function Rules({ onAddRules, rules, gameId }) {
   function handleSubmit(event) {
     event.preventDefault();
     const gameRules = event.target.rules.value;
-    onAddRules(gameRules);
+    onAddRules(gameRules, gameId);
     event.target.reset();
   }
 

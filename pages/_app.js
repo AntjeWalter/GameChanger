@@ -36,18 +36,126 @@ function MyApp({ Component, pageProps }) {
     );
   }
 
+  function handleAddPoints(playerId, currentGame, gameId) {
+    const currentPlayer = currentGame.players.find(
+      (player) => player.id === playerId
+    );
+
+    const newPoints = currentPlayer.points + 1;
+    const playerNewPoints = currentGame.players.map((player) =>
+      player.id === playerId ? { ...player, points: newPoints } : player
+    );
+
+    setGames(
+      games.map((game) =>
+        game.id === gameId
+          ? {
+              ...game,
+              players: playerNewPoints,
+            }
+          : game
+      )
+    );
+  }
+
+  function handleRemovePoints(playerId, currentGame, gameId) {
+    const currentPlayer = currentGame.players.find(
+      (player) => player.id === playerId
+    );
+
+    const newPoints = currentPlayer.points - 1;
+    const playerNewPoints = currentGame.players.map((player) =>
+      player.id === playerId ? { ...player, points: newPoints } : player
+    );
+
+    setGames(
+      games.map((game) =>
+        game.id === gameId
+          ? {
+              ...game,
+              players: playerNewPoints,
+            }
+          : game
+      )
+    );
+  }
+
+  function handleAddContestantPoints(contestantId, currentGame, gameId) {
+    const currentContestant = currentGame.contestants.find(
+      (contestant) => contestant.id === contestantId
+    );
+
+    const newPoints = currentContestant.points + 1;
+    const contestantNewPoints = currentGame.contestants.map((contestant) =>
+      contestant.id === contestantId
+        ? { ...contestant, points: newPoints }
+        : contestant
+    );
+
+    setGames(
+      games.map((game) =>
+        game.id === gameId
+          ? {
+              ...game,
+              contestants: contestantNewPoints,
+            }
+          : game
+      )
+    );
+  }
+
+  function handleRemoveContestantPoints(contestantId, currentGame, gameId) {
+    const currentContestant = currentGame.contestants.find(
+      (contestant) => contestant.id === contestantId
+    );
+
+    const newPoints = currentContestant.points - 1;
+    const contestantNewPoints = currentGame.contestants.map((contestant) =>
+      contestant.id === contestantId
+        ? { ...contestant, points: newPoints }
+        : contestant
+    );
+
+    setGames(
+      games.map((game) =>
+        game.id === gameId
+          ? {
+              ...game,
+              contestants: contestantNewPoints,
+            }
+          : game
+      )
+    );
+  }
+
+  function handleAddNotes(gameNotes, gameId) {
+    setGames(
+      games.map((game) =>
+        game.id === gameId ? { ...game, notes: gameNotes } : game
+      )
+    );
+  }
+
+  function handleAddRules(gameRules, gameId) {
+    setGames(
+      games.map((game) =>
+        game.id === gameId ? { ...game, rules: gameRules } : game
+      )
+    );
+  }
+
   function handleAddChosenContestants(chosenName, playerId, gameId) {
     const currentGame = games.find((game) => game.id === gameId);
 
-    const currentPlayer = currentGame.players.find(
-      (player) => player.id === playerId
+    const addedContestant = currentGame.contestants.find(
+      (contestant) => contestant.name === chosenName
     );
 
     const playerWithChosenContestant = currentGame.players.map((player) =>
       player.id === playerId
         ? {
             ...player,
-            chosenContestants: [...player.chosenContestants, chosenName],
+            chosenContestants: [...player.chosenContestants, addedContestant],
           }
         : player
     );
@@ -64,6 +172,40 @@ function MyApp({ Component, pageProps }) {
     );
   }
 
+  function handleDeleteChosenContestant(contestantId, gameId, currentPlayerId) {
+    const currentGame = games.find((game) => game.id === gameId);
+    const currentPlayer = currentGame.players.find(
+      (player) => player.id === currentPlayerId
+    );
+    const currentPlayersContestants = currentPlayer.chosenContestants;
+
+    const updatedList = currentPlayersContestants.filter((contestant) => {
+      return contestant.id !== contestantId;
+    });
+
+    console.log(updatedList, "updatedList");
+
+    const playerWithUpdatedList = currentGame.players.map((player) =>
+      player.id === currentPlayerId
+        ? {
+            ...player,
+            chosenContestants: updatedList,
+          }
+        : player
+    );
+
+    setGames(
+      games.map((game) =>
+        game.id === gameId
+          ? {
+              ...game,
+              players: playerWithUpdatedList,
+            }
+          : game
+      )
+    );
+  }
+
   return (
     <>
       <GlobalStyles />
@@ -73,8 +215,15 @@ function MyApp({ Component, pageProps }) {
         onDelete={handleDeleteGame}
         onAddNewPlayer={handleAddNewPlayer}
         onAddNewContestant={handleAddNewContestant}
-        games={games}
         onAddChosenContestants={handleAddChosenContestants}
+        onDeleteChosenContestant={handleDeleteChosenContestant}
+        onAddPoints={handleAddPoints}
+        onRemovePoints={handleRemovePoints}
+        onAddContestantPoints={handleAddContestantPoints}
+        onRemoveContestantPoints={handleRemoveContestantPoints}
+        onAddNotes={handleAddNotes}
+        onAddRules={handleAddRules}
+        games={games}
       />
     </>
   );

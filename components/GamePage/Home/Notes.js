@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export default function Notes({ onAddNotes, notes }) {
+export default function Notes({ onAddNotes, notes, gameId }) {
   function handleSubmit(event) {
     event.preventDefault();
     const gameNotes = event.target.notes.value;
-    onAddNotes(gameNotes);
+    onAddNotes(gameNotes, gameId);
     event.target.reset();
   }
 

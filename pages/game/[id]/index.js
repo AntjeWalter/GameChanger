@@ -12,11 +12,18 @@ export default function GamePage({
   onAddNewPlayer,
   onAddNewContestant,
   onAddChosenContestants,
+  onDeleteChosenContestant,
+  onAddPoints,
+  onRemovePoints,
+  onAddContestantPoints,
+  onRemoveContestantPoints,
+  onAddNotes,
+  onAddRules,
+  games,
 }) {
   const router = useRouter();
   const { id } = router.query;
 
-  const [games, setGames] = useLocalStorage("games");
   const [home, setHome] = useState(true);
   const [players, setPlayers] = useState(false);
   const [contestants, setContestants] = useState(false);
@@ -29,114 +36,6 @@ export default function GamePage({
 
   if (!currentGame) {
     return null;
-  }
-
-  function handleAddPoints(playerId) {
-    const currentPlayer = currentGame.players.find(
-      (player) => player.id === playerId
-    );
-
-    const newPoints = currentPlayer.points + 1;
-    const playerNewPoints = currentGame.players.map((player) =>
-      player.id === playerId ? { ...player, points: newPoints } : player
-    );
-
-    setGames(
-      games.map((game) =>
-        game.id === id
-          ? {
-              ...game,
-              players: playerNewPoints,
-            }
-          : game
-      )
-    );
-  }
-
-  function handleRemovePoints(playerId) {
-    const currentPlayer = currentGame.players.find(
-      (player) => player.id === playerId
-    );
-
-    const newPoints = currentPlayer.points - 1;
-    const playerNewPoints = currentGame.players.map((player) =>
-      player.id === playerId ? { ...player, points: newPoints } : player
-    );
-
-    setGames(
-      games.map((game) =>
-        game.id === id
-          ? {
-              ...game,
-              players: playerNewPoints,
-            }
-          : game
-      )
-    );
-  }
-
-  function handleAddContestantPoints(contestantId) {
-    const currentContestant = currentGame.contestants.find(
-      (contestant) => contestant.id === contestantId
-    );
-
-    const newPoints = currentContestant.points + 1;
-    const contestantNewPoints = currentGame.contestants.map((contestant) =>
-      contestant.id === contestantId
-        ? { ...contestant, points: newPoints }
-        : contestant
-    );
-
-    setGames(
-      games.map((game) =>
-        game.id === id
-          ? {
-              ...game,
-              contestants: contestantNewPoints,
-            }
-          : game
-      )
-    );
-  }
-
-  function handleRemoveContestantPoints(contestantId) {
-    const currentContestant = currentGame.contestants.find(
-      (contestant) => contestant.id === contestantId
-    );
-
-    const newPoints = currentContestant.points - 1;
-    const contestantNewPoints = currentGame.contestants.map((contestant) =>
-      contestant.id === contestantId
-        ? { ...contestant, points: newPoints }
-        : contestant
-    );
-
-    setGames(
-      games.map((game) =>
-        game.id === id
-          ? {
-              ...game,
-              contestants: contestantNewPoints,
-            }
-          : game
-      )
-    );
-  }
-
-  function handleAddNotes(gameNotes) {
-    setGames(
-      games.map((game) =>
-        game.id === id ? { ...game, notes: gameNotes } : game
-      )
-    );
-  }
-
-  function handleAddRules(gameRules) {
-    setGames(
-      games.map((game) =>
-        game.id === id ? { ...game, rules: gameRules } : game
-      )
-    );
   }
 
   const playersArray = currentGame.players;
@@ -176,9 +75,9 @@ export default function GamePage({
           <h3>Home</h3>
           <NotesAndRules
             gameId={currentGame.id}
-            onAddNotes={handleAddNotes}
+            onAddNotes={onAddNotes}
             notes={currentGame.notes}
-            onAddRules={handleAddRules}
+            onAddRules={onAddRules}
             rules={currentGame.rules}
           />
         </>
@@ -189,11 +88,12 @@ export default function GamePage({
           <PlayersAndPoints
             gameId={currentGame.id}
             playersArray={playersArray}
-            onAddPoints={handleAddPoints}
-            onRemovePoints={handleRemovePoints}
+            onAddPoints={onAddPoints}
+            onRemovePoints={onRemovePoints}
             currentGame={currentGame}
-            games={games}
             onAddChosenContestants={onAddChosenContestants}
+            onDeleteChosenContestant={onDeleteChosenContestant}
+            games={games}
           />
         </>
       ) : contestants ? (
@@ -206,8 +106,9 @@ export default function GamePage({
           <ContestantsAndPoints
             gameId={currentGame.id}
             contestantsArray={contestantsArray}
-            onAddContestantPoints={handleAddContestantPoints}
-            onRemoveContestantPoints={handleRemoveContestantPoints}
+            onAddContestantPoints={onAddContestantPoints}
+            onRemoveContestantPoints={onRemoveContestantPoints}
+            currentGame={currentGame}
           />
         </>
       ) : null}

@@ -6,6 +6,8 @@ export default function Contestant({
   points,
   onAddContestantPoints,
   onRemoveContestantPoints,
+  currentGame,
+  gameId,
 }) {
   return (
     <StyledContestant>
@@ -16,13 +18,17 @@ export default function Contestant({
       <StyledButtons>
         <StyledRemoveButton
           aria-label="Remove one point"
-          onClick={() => onRemoveContestantPoints(contestantId)}
+          onClick={() =>
+            onRemoveContestantPoints(contestantId, currentGame, gameId)
+          }
         >
           -
         </StyledRemoveButton>
         <StyledAddButton
           aria-label="Add one point"
-          onClick={() => onAddContestantPoints(contestantId)}
+          onClick={() =>
+            onAddContestantPoints(contestantId, currentGame, gameId)
+          }
         >
           +
         </StyledAddButton>

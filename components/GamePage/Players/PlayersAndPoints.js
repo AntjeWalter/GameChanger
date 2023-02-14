@@ -8,6 +8,7 @@ export default function PlayersAndPoints({
   gameId,
   currentGame,
   onAddChosenContstants,
+  games,
 }) {
   return playersArray.map((player) => {
     return (
@@ -21,6 +22,7 @@ export default function PlayersAndPoints({
           gameId={gameId}
           currentGame={currentGame}
           onAddChosenContstants={onAddChosenContstants}
+          games={games}
         />
       </Fragment>
     );
