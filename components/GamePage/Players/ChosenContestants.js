@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SlClose } from "react-icons/sl";
 
 export default function ChosenContestant({
   contestantId,
@@ -10,29 +11,25 @@ export default function ChosenContestant({
 }) {
   return (
     <StyledListItem>
-      {contestantName}: {contestantPoints} points
       <StyledDeleteButton
         onClick={() =>
           onDeleteChosenContestant(contestantId, gameId, currentPlayerId)
         }
       >
-        x
+        <SlClose />
       </StyledDeleteButton>
+      {contestantName}: {contestantPoints} points
     </StyledListItem>
   );
 }
 
 const StyledListItem = styled.li`
-  display: flex;
-  justify-content: space-between;
   margin-bottom: 10px;
 `;
 
 const StyledDeleteButton = styled.button`
   border: none;
-  border-radius: 2px;
-  background-color: #990d35;
-  color: white;
-  width: 25px;
-  font-size: 1.1rem;
+  background-color: transparent;
+  font-size: 0.9rem;
+  margin-right: 10px;
 `;

@@ -53,9 +53,11 @@ export default function SinglePlayer({
 
 const StyledSelect = styled.select`
   font-family: inherit;
+  width: 70%;
+  height: 30px;
 `;
 
 const StyledList = styled.ul`
   list-style-type: none;
-  padding-left: 15px;
+  padding-left: 10px;
 `;
