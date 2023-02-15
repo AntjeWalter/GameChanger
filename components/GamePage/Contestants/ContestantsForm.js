@@ -17,7 +17,7 @@ export default function ContestantsForm({ onAddNewContestant, gameId }) {
   return (
     <>
       <StyledForm onSubmit={handleContestantSubmit}>
-        <label>Add name:</label>
+        <label>Add contestant:</label>
         <StyledInput
           placeholder="Contestant Name"
           name="contestant"
