@@ -19,6 +19,7 @@ export default function SinglePlayer({
     event.preventDefault();
     const chosenName = event.target.value;
     onAddChosenContestants(chosenName, playerId, gameId, contestants);
+    event.target.value = "selected";
   }
 
   return (
