@@ -1,14 +1,13 @@
 import { useRouter } from "next/router";
-import { useLocalStorage } from "/helpers/hooks";
 import SinglePlayer from "../../../../components/GamePage/Players/SinglePlayer";
 import styled from "styled-components";
-import { useState } from "react";
 
 export default function PlayerPage({
   gameId,
   onAddChosenContestants,
   onDeleteChosenContestant,
   games,
+  onSumChange,
 }) {
   const router = useRouter();
   const { id, playerId } = router.query;
@@ -29,6 +28,27 @@ export default function PlayerPage({
 
   console.log("currentPlayer", currentPlayer);
 
+  const arrayOfChosenContestantsPoints = currentPlayer.chosenContestants.map(
+    (points) => points.points
+  );
+
+  const sumOfChosenContestantsPoints = arrayOfChosenContestantsPoints.reduce(
+    (a, b) => {
+      return a + b;
+    },
+    0
+  );
+
+  const playerWithChosenContestantPoints = {
+    ...currentPlayer,
+    points: sumOfChosenContestantsPoints,
+  };
+
+  console.log(
+    "playerWithChosenContestantPoints",
+    playerWithChosenContestantPoints
+  );
+
   return (
     <>
       <SinglePlayer
@@ -38,6 +58,8 @@ export default function PlayerPage({
         currentGame={currentGame}
         onAddChosenContestants={onAddChosenContestants}
         onDeleteChosenContestant={onDeleteChosenContestant}
+        sumOfChosenContestantsPoints={sumOfChosenContestantsPoints}
+        onSumChange={onSumChange}
       />
       <StyledBackButton onClick={() => router.back()}>🔙</StyledBackButton>
     </>

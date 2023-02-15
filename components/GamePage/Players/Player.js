@@ -16,7 +16,11 @@ export default function Player({
         {name}
       </StyledLink>
       <StyledPoints>
-        {points === 1 ? `${points} Punkt` : `${points} Punkte`}{" "}
+        {points === 1
+          ? `${points} Punkt`
+          : points === ""
+          ? `0 Punkte`
+          : `${points} Punkte`}
       </StyledPoints>
       <StyledButtons>
         <StyledRemoveButton

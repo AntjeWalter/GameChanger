@@ -59,6 +59,19 @@ export default function GamePage({
     setContestants(true);
   }
 
+  /* const arrayOfChosenContestantsPoints = currentGame.players.map((player) =>
+    player.chosenContestants.map((points) => points.points)
+  );
+
+  console.log("array", arrayOfChosenContestantsPoints);
+
+  const sumOfChosenContestantsPoints = arrayOfChosenContestantsPoints.reduce(
+    (a, b) => {
+      return a + b;
+    },
+    0
+  ); */
+
   return (
     <>
       <h2>{currentGame.name}</h2>

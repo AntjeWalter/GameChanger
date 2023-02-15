@@ -7,7 +7,7 @@ export default function PlayerForm({ onAddNewPlayer, gameId }) {
     const player = event.target.player.value;
     const newPlayer = {
       name: player,
-      points: 0,
+      points: "",
       id: nanoid(),
       chosenContestants: [],
     };

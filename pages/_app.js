@@ -1,6 +1,6 @@
+import { useEffect } from "react";
 import GlobalStyles from "../components/GlobalStyles";
 import { useLocalStorage } from "../helpers/hooks";
-import { useEffect } from "react";
 
 function MyApp({ Component, pageProps }) {
   const [games, setGames] = useLocalStorage("games", []);
@@ -171,45 +171,43 @@ function MyApp({ Component, pageProps }) {
         : contestant
     );
 
+    const playersChosenContestantWithNewPoints = currentGame.players.map(
+      (player) => {
+        return {
+          ...player,
+          chosenContestants: player.chosenContestants.map((contestant) =>
+            contestant.id === contestantId
+              ? { ...contestant, points: contestant.points + 1 }
+              : contestant
+          ),
+        };
+      }
+    );
+
+    const playersNewSumOfPoints = playersChosenContestantWithNewPoints.map(
+      (player) => {
+        return {
+          ...player,
+          points: player.chosenContestants
+            .map((points) => points.points)
+            .reduce((a, b) => {
+              return a + b;
+            }, 0),
+        };
+      }
+    );
+
     setGames(
       games.map((game) =>
         game.id === gameId
           ? {
               ...game,
               contestants: contestantNewPoints,
+              players: playersNewSumOfPoints,
             }
           : game
       )
     );
-
-    /*  const huhu = currentGame?.players?.map((player) =>
-
-            //if(player.chosenContestants.includes(contestantId)) {
-            //  return ({...player, chosenContestants: })
-            // }
-
-      player.chosenContestants.map((contestant) =>
-        contestant.id === contestantId
-          ? { ...contestant, points: contestant.points + 1 }
-          : contestant
-      )
-    );
-
-    console.log("huhu", huhu);
-
-    setGames(
-      games.map((game) =>
-        game.id === gameId
-          ? {
-              ...game,
-              players: {
-                ...game.players,
-                huhu,
-              },
-            }
-          : game
-      )
-    ); */
   }
 
   function handleRemoveContestantPoints(contestantId, currentGame, gameId) {
@@ -218,10 +216,33 @@ function MyApp({ Component, pageProps }) {
     );
 
     const newPoints = currentContestant.points - 1;
+
     const contestantNewPoints = currentGame.contestants.map((contestant) =>
       contestant.id === contestantId
         ? { ...contestant, points: newPoints }
         : contestant
+    );
+
+    const playersChosenContestantWithNewPoints = currentGame.players.map(
+      (player) => {
+        return {
+          ...player,
+          chosenContestants: player.chosenContestants.map((contestant) =>
+            contestant.id === contestantId
+              ? { ...contestant, points: contestant.points - 1 }
+              : contestant
+          ),
+        };
+      }
+    );
+
+    const playersNewSumOfPoints = playersChosenContestantWithNewPoints.map(
+      (player) => {
+        return {
+          ...player,
+          points: player.points - 1,
+        };
+      }
     );
 
     setGames(
@@ -230,11 +251,13 @@ function MyApp({ Component, pageProps }) {
           ? {
               ...game,
               contestants: contestantNewPoints,
+              players: playersNewSumOfPoints,
             }
           : game
       )
     );
   }
+
   return (
     <>
       <GlobalStyles />

@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useLocalStorage } from "../../../helpers/hooks";
 import ChosenContestant from "./ChosenContestants";
 
@@ -8,9 +8,9 @@ export default function SinglePlayer({
   currentPlayer,
   onAddChosenContestants,
   onDeleteChosenContestant,
+  sumOfChosenContestantsPoints,
 }) {
   const currentName = currentPlayer.name;
-  const currentPoints = currentPlayer.points;
   const contestants = currentGame.contestants;
   const gameId = currentGame.id;
   const currentPlayersContestants = currentPlayer.chosenContestants;
@@ -24,7 +24,7 @@ export default function SinglePlayer({
   return (
     <>
       <h3>Player: {currentName}</h3>
-      <p>Total points: {currentPoints}</p>
+      <p>Total points: {sumOfChosenContestantsPoints}</p>
       <br />
       <h4>Chosen Contestants:</h4>
       <select onChange={handleChange}>
