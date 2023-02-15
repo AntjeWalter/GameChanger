@@ -258,6 +258,21 @@ function MyApp({ Component, pageProps }) {
     );
   }
 
+  function handleDeleteContestant(contestantId, currentGame, gameId) {
+    const updatedContestantList = currentGame.contestants.filter(
+      (contestant) => {
+        return contestant.id !== contestantId;
+      }
+    );
+    setGames(
+      games.map((game) =>
+        game.id === gameId
+          ? { ...game, contestants: [...updatedContestantList] }
+          : game
+      )
+    );
+  }
+
   return (
     <>
       <GlobalStyles />
@@ -275,6 +290,7 @@ function MyApp({ Component, pageProps }) {
         onRemoveContestantPoints={handleRemoveContestantPoints}
         onAddNotes={handleAddNotes}
         onAddRules={handleAddRules}
+        onDeleteContestant={handleDeleteContestant}
         games={games}
       />
     </>

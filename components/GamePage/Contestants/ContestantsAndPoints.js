@@ -5,6 +5,7 @@ export default function ContestantsAndPoints({
   contestantsArray,
   onAddContestantPoints,
   onRemoveContestantPoints,
+  onDeleteContestant,
   currentGame,
   gameId,
 }) {
@@ -17,6 +18,7 @@ export default function ContestantsAndPoints({
           points={contestant.points}
           onAddContestantPoints={onAddContestantPoints}
           onRemoveContestantPoints={onRemoveContestantPoints}
+          onDeleteContestant={onDeleteContestant}
           currentGame={currentGame}
           gameId={gameId}
         />

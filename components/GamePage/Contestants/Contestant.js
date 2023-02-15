@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SlClose } from "react-icons/sl";
 
 export default function Contestant({
   contestantId,
@@ -6,11 +7,17 @@ export default function Contestant({
   points,
   onAddContestantPoints,
   onRemoveContestantPoints,
+  onDeleteContestant,
   currentGame,
   gameId,
 }) {
   return (
     <StyledContestant>
+      <StyledDeleteButton
+        onClick={() => onDeleteContestant(contestantId, currentGame, gameId)}
+      >
+        <SlClose />
+      </StyledDeleteButton>
       <StyledName>{name}</StyledName>
       <StyledPoints>
         {points === 1 ? `${points} Punkt` : `${points} Punkte`}{" "}
@@ -40,8 +47,14 @@ export default function Contestant({
 const StyledContestant = styled.section`
   display: grid;
   grid-template-areas: "name name points buttons";
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 0.2fr 1fr 1fr 1fr;
   margin: 10px 0;
+  gap: 3px;
+`;
+
+const StyledDeleteButton = styled.button`
+  border: none;
+  background-color: transparent;
 `;
 
 const StyledName = styled.div`
@@ -62,6 +75,8 @@ const StyledRemoveButton = styled.button`
   border-radius: 2px;
   background-color: #990d35;
   color: white;
+  font-size: 1.1rem;
+  width: 25px;
 `;
 
 const StyledAddButton = styled.button`
@@ -70,4 +85,6 @@ const StyledAddButton = styled.button`
   border-radius: 2px;
   color: white;
   margin-left: 2px;
+  font-size: 1.1rem;
+  width: 25px;
 `;

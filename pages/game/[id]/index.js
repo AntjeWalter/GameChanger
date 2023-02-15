@@ -19,6 +19,7 @@ export default function GamePage({
   onRemoveContestantPoints,
   onAddNotes,
   onAddRules,
+  onDeleteContestant,
   games,
 }) {
   const router = useRouter();
@@ -108,6 +109,7 @@ export default function GamePage({
             contestantsArray={contestantsArray}
             onAddContestantPoints={onAddContestantPoints}
             onRemoveContestantPoints={onRemoveContestantPoints}
+            onDeleteContestant={onDeleteContestant}
             currentGame={currentGame}
           />
         </>

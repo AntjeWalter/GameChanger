@@ -33,4 +33,6 @@ const StyledDeleteButton = styled.button`
   border-radius: 2px;
   background-color: #990d35;
   color: white;
+  width: 25px;
+  font-size: 1.1rem;
 `;
