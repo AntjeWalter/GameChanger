@@ -1,6 +1,6 @@
-import { Fragment, useEffect } from "react";
-import { useLocalStorage } from "../../../helpers/hooks";
+import { Fragment } from "react";
 import ChosenContestant from "./ChosenContestants";
+import styled from "styled-components";
 
 export default function SinglePlayer({
   playerId,
@@ -27,13 +27,13 @@ export default function SinglePlayer({
       <p>Total points: {sumOfChosenContestantsPoints}</p>
       <br />
       <h4>Chosen Contestants:</h4>
-      <select onChange={handleChange}>
+      <StyledSelect onChange={handleChange}>
         <option value="selected">Which contestant do you bet on?</option>
         {contestants.map((contestant) => (
           <option key={contestant.id}>{contestant.name}</option>
         ))}
-      </select>
-      <ul>
+      </StyledSelect>
+      <StyledList>
         {currentPlayersContestants.map((contestant) => (
           <Fragment key={contestant.id}>
             <ChosenContestant
@@ -46,7 +46,16 @@ export default function SinglePlayer({
             />
           </Fragment>
         ))}
-      </ul>
+      </StyledList>
     </>
   );
 }
+
+const StyledSelect = styled.select`
+  font-family: inherit;
+`;
+
+const StyledList = styled.ul`
+  list-style-type: none;
+  padding-left: 15px;
+`;

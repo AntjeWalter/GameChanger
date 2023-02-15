@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import { useLocalStorage } from "../../../helpers/hooks";
 import { useState } from "react";
 import styled from "styled-components";
+import { SlArrowLeftCircle } from "react-icons/sl";
 import PlayerForm from "../../../components/GamePage/Players/PlayerForm";
 import PlayersAndPoints from "../../../components/GamePage/Players/PlayersAndPoints";
 import NotesAndRules from "../../../components/GamePage/Home/NotesAndRules";
@@ -59,19 +59,6 @@ export default function GamePage({
     setContestants(true);
   }
 
-  /* const arrayOfChosenContestantsPoints = currentGame.players.map((player) =>
-    player.chosenContestants.map((points) => points.points)
-  );
-
-  console.log("array", arrayOfChosenContestantsPoints);
-
-  const sumOfChosenContestantsPoints = arrayOfChosenContestantsPoints.reduce(
-    (a, b) => {
-      return a + b;
-    },
-    0
-  ); */
-
   return (
     <>
       <h2>{currentGame.name}</h2>
@@ -126,7 +113,10 @@ export default function GamePage({
         </>
       ) : null}
 
-      <StyledBackButton onClick={() => router.back()}>🔙</StyledBackButton>
+      <StyledBackButton onClick={() => router.back()}>
+        {" "}
+        <SlArrowLeftCircle /> Back
+      </StyledBackButton>
     </>
   );
 }
@@ -134,6 +124,7 @@ export default function GamePage({
 const StyledNavigation = styled.section`
   display: flex;
   justify-content: space-around;
+  font-family: inherit;
 `;
 
 const StyledButton = styled.button`
@@ -142,6 +133,7 @@ const StyledButton = styled.button`
   border-bottom: 3px solid #990d35;
   background-color: transparent;
   font-size: 0.9rem;
+  font-family: inherit;
 `;
 
 const StyledBackButton = styled.button`
@@ -149,6 +141,7 @@ const StyledBackButton = styled.button`
   bottom: 10px;
   left: 20px;
   background-color: transparent;
-  border-radius: 5px;
-  font-size: 1.2rem;
+  border: none;
+  font-size: 1rem;
+  font-family: inherit;
 `;

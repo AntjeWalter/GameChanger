@@ -1,4 +1,4 @@
-import { useLocalStorage } from "../../../helpers/hooks";
+import styled from "styled-components";
 
 export default function ChosenContestant({
   contestantId,
@@ -9,15 +9,28 @@ export default function ChosenContestant({
   currentPlayerId,
 }) {
   return (
-    <li>
+    <StyledListItem>
       {contestantName}: {contestantPoints} points
-      <button
+      <StyledDeleteButton
         onClick={() =>
           onDeleteChosenContestant(contestantId, gameId, currentPlayerId)
         }
       >
         x
-      </button>
-    </li>
+      </StyledDeleteButton>
+    </StyledListItem>
   );
 }
+
+const StyledListItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+`;
+
+const StyledDeleteButton = styled.button`
+  border: none;
+  border-radius: 2px;
+  background-color: #990d35;
+  color: white;
+`;

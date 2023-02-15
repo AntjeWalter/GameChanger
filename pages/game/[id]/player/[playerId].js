@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import SinglePlayer from "../../../../components/GamePage/Players/SinglePlayer";
 import styled from "styled-components";
+import { SlArrowLeftCircle } from "react-icons/sl";
 
 export default function PlayerPage({
   gameId,
@@ -61,7 +62,9 @@ export default function PlayerPage({
         sumOfChosenContestantsPoints={sumOfChosenContestantsPoints}
         onSumChange={onSumChange}
       />
-      <StyledBackButton onClick={() => router.back()}>🔙</StyledBackButton>
+      <StyledBackButton onClick={() => router.back()}>
+        <SlArrowLeftCircle /> Back
+      </StyledBackButton>
     </>
   );
 }
@@ -71,6 +74,7 @@ const StyledBackButton = styled.button`
   bottom: 10px;
   left: 20px;
   background-color: transparent;
-  border-radius: 5px;
-  font-size: 1.2rem;
+  border: none;
+  font-size: 1rem;
+  font-family: inherit;
 `;
