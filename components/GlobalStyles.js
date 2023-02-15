@@ -6,6 +6,7 @@ const GlobalStyles = createGlobalStyle`
         padding: 0;
         margin: 10px;
         font-family: Quicksand;
+        font-size: 1.1rem;
         background-color: #f6f8ff;
     }   
 

@@ -1,10 +1,13 @@
 import { Fragment } from "react";
 import Contestant from "./Contestant";
 
-export default function PlayersAndPoints({
+export default function ContestantsAndPoints({
   contestantsArray,
   onAddContestantPoints,
   onRemoveContestantPoints,
+  onDeleteContestant,
+  currentGame,
+  gameId,
 }) {
   return contestantsArray.map((contestant) => {
     return (
@@ -15,6 +18,9 @@ export default function PlayersAndPoints({
           points={contestant.points}
           onAddContestantPoints={onAddContestantPoints}
           onRemoveContestantPoints={onRemoveContestantPoints}
+          onDeleteContestant={onDeleteContestant}
+          currentGame={currentGame}
+          gameId={gameId}
         />
       </Fragment>
     );

@@ -1,69 +1,37 @@
 import styled from "styled-components";
+import Link from "next/link";
+import { SlArrowRight } from "react-icons/sl";
 
-export default function Player({
-  playerId,
-  name,
-  points,
-  onAddPoints,
-  onRemovePoints,
-}) {
+export default function Player({ playerId, name, points, gameId }) {
   return (
     <StyledPlayer>
-      <StyledName>{name}</StyledName>
+      <StyledLink href={`/game/${gameId}/player/${playerId}`}>
+        <SlArrowRight /> {name}
+      </StyledLink>
       <StyledPoints>
-        {points === 1 ? `${points} Punkt` : `${points} Punkte`}{" "}
+        {points === 1
+          ? `${points} Point`
+          : points === ""
+          ? `0 Points`
+          : `${points} Points`}
       </StyledPoints>
-      <StyledButtons>
-        <StyledRemoveButton
-          aria-label="Remove one point"
-          onClick={() => onRemovePoints(playerId)}
-        >
-          -
-        </StyledRemoveButton>
-        <StyledAddButton
-          aria-label="Add one point"
-          onClick={() => onAddPoints(playerId)}
-        >
-          +
-        </StyledAddButton>
-      </StyledButtons>
     </StyledPlayer>
   );
 }
 
 const StyledPlayer = styled.section`
   display: grid;
-  grid-template-areas: "name name points buttons";
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-areas: "name name points";
+  grid-template-columns: 2fr 1fr;
   margin: 10px 0;
 `;
 
-const StyledName = styled.div`
+const StyledLink = styled(Link)`
   grid-area: "name";
+  text-decoration: none;
+  color: black;
 `;
 
 const StyledPoints = styled.div`
   grid-area: "points";
-`;
-
-const StyledButtons = styled.div`
-  grid-area: "buttons";
-  justify-self: right;
-`;
-
-const StyledRemoveButton = styled.button`
-  border: none;
-  border-radius: 2px;
-  background-color: #990d35;
-  color: white;
-  font-family: inherit;
-`;
-
-const StyledAddButton = styled.button`
-  background-color: #0d9971;
-  border: none;
-  border-radius: 2px;
-  color: white;
-  margin-left: 2px;
-  font-family: inherit;
 `;

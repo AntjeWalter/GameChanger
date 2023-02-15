@@ -11,6 +11,7 @@ export default function ContestantsForm({ onAddNewContestant, gameId }) {
       id: nanoid(),
     };
     onAddNewContestant(newContestant, gameId);
+    event.target.reset();
   }
 
   return (

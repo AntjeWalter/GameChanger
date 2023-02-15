@@ -41,10 +41,12 @@ const StyledLabel = styled.label`
 
 const StyledInput = styled.input`
   display: block;
-  width: 200px;
+  width: 70%;
+  height: 30px;
   margin-bottom: 5px;
   margin: auto;
   text-align: center;
+  font-size: 0.8rem;
 `;
 
 const StyledButton = styled.button`

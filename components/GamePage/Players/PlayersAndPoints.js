@@ -5,6 +5,10 @@ export default function PlayersAndPoints({
   playersArray,
   onAddPoints,
   onRemovePoints,
+  gameId,
+  currentGame,
+  onAddChosenContstants,
+  games,
 }) {
   return playersArray.map((player) => {
     return (
@@ -15,6 +19,10 @@ export default function PlayersAndPoints({
           points={player.points}
           onAddPoints={onAddPoints}
           onRemovePoints={onRemovePoints}
+          gameId={gameId}
+          currentGame={currentGame}
+          onAddChosenContstants={onAddChosenContstants}
+          games={games}
         />
       </Fragment>
     );
