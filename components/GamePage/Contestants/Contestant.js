@@ -20,7 +20,7 @@ export default function Contestant({
       </StyledDeleteButton>
       <StyledName>{name}</StyledName>
       <StyledPoints>
-        {points === 1 ? `${points} Punkt` : `${points} Punkte`}{" "}
+        {points === 1 ? `${points} Point` : `${points} Points`}{" "}
       </StyledPoints>
       <StyledButtons>
         <StyledRemoveButton

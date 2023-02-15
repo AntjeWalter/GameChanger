@@ -10,10 +10,10 @@ export default function Player({ playerId, name, points, gameId }) {
       </StyledLink>
       <StyledPoints>
         {points === 1
-          ? `${points} Punkt`
+          ? `${points} Point`
           : points === ""
-          ? `0 Punkte`
-          : `${points} Punkte`}
+          ? `0 Points`
+          : `${points} Points`}
       </StyledPoints>
     </StyledPlayer>
   );
