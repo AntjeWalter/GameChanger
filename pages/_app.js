@@ -240,7 +240,11 @@ function MyApp({ Component, pageProps }) {
       (player) => {
         return {
           ...player,
-          points: player.points - 1,
+          points: player.chosenContestants
+            .map((points) => points.points)
+            .reduce((a, b) => {
+              return a + b;
+            }, 0),
         };
       }
     );
