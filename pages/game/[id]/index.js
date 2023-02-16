@@ -104,14 +104,16 @@ export default function GamePage({
             onAddNewContestant={onAddNewContestant}
             gameId={currentGame.id}
           />
-          <ContestantsAndPoints
-            gameId={currentGame.id}
-            contestantsArray={contestantsArray}
-            onAddContestantPoints={onAddContestantPoints}
-            onRemoveContestantPoints={onRemoveContestantPoints}
-            onDeleteContestant={onDeleteContestant}
-            currentGame={currentGame}
-          />
+          <StyledContestantContainer>
+            <ContestantsAndPoints
+              gameId={currentGame.id}
+              contestantsArray={contestantsArray}
+              onAddContestantPoints={onAddContestantPoints}
+              onRemoveContestantPoints={onRemoveContestantPoints}
+              onDeleteContestant={onDeleteContestant}
+              currentGame={currentGame}
+            />
+          </StyledContestantContainer>
         </>
       ) : null}
 
@@ -127,6 +129,10 @@ const StyledNavigation = styled.section`
   display: flex;
   justify-content: space-around;
   font-family: inherit;
+`;
+
+const StyledContestantContainer = styled.section`
+  margin-bottom: 50px;
 `;
 
 const StyledButton = styled.button`
